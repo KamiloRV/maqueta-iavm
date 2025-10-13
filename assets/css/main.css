@@ -153,7 +153,7 @@ blockquote, q {
     font-size: 1.25rem;
 }
 
-.subtitle {
+.iavm-subtitle {
     font-family: var(--primary-font);
     color: var(--text-icon-color);
     font-size: 1.125rem;
@@ -189,7 +189,7 @@ blockquote, q {
 }
 
 .dark {
-    color: var(--dark-color);
+    color: var(--text-color);
 }
 
 .dark-blue {
@@ -1363,6 +1363,7 @@ a.logo:focus-visible {
 }
 
 .page-template-page-admision .requirements .container .requirements-list ol li {
+    position: relative;
     counter-increment: requirements-counter;
     display: flex;
     align-items: center;
@@ -1371,8 +1372,7 @@ a.logo:focus-visible {
     font-size: 1rem;
 }
 
-.page-template-page-admision .requirements .container .requirements-list ol li::before {
-    content: "0" counter(requirements-counter);
+.page-template-page-admision .requirements .container .requirements-list ol li span {
     font-size: 64px;
     font-weight: 800;
     line-height: 1;
@@ -1381,6 +1381,24 @@ a.logo:focus-visible {
     width: 73px;
     aspect-ratio: 1/1;
     flex-shrink: 0;
+}
+
+
+.page-template-page-admision .requirements .container .requirements-list ol li::before {
+    content: counter(requirements-counter);
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1;
+    font-family: var(--secondary-font);
+    color: var(--text-icon-color);
+    width: 73px;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
 }
 
 .line-dashed {
@@ -1937,19 +1955,9 @@ a.logo:focus-visible {
     gap: 50px;
 }   
 
-.right {
-    display: flex;
-    flex-direction: row;
-}
-
-.left {
-    display: flex;
-    flex-direction: row-reverse;
-}
-
 .page-template-page-testimonios .testimonies .testimonies-list .testimony .testimony-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     border-radius: 16px;
 }
 
@@ -2074,7 +2082,7 @@ body.darkmode .page-template-page-testimonios .testimonies .testimonies-list .te
         width: 420px;
         height: 424px;
     }
-    .page-template-page-testimonios .testimonies .testimonies-list .testimony .testimony-card.left {
+    .page-template-page-testimonios .testimonies .testimonies-list .testimony .testimony-card.right {
         flex-direction: row-reverse;
     }
     .page-template-page-testimonios .testimonies .testimonies-list .testimony .testimony-card.left .info::before {
@@ -2158,6 +2166,12 @@ body.darkmode .page-template-page-testimonios .testimonies .testimonies-list .te
     object-fit: cover;
     object-position: center;
     border-radius: 16px;
+}
+
+.page-template-page-equipo .team .staff-list .staff .staff-card .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .page-template-page-equipo .team .staff-list .staff .staff-card .info h3 {
