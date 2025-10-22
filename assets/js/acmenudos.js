@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Cargar preferencia guardada
         let savedMode = localStorage.getItem("dark-mode");
 
-        const basePath = window.location.pathname.includes('/mi-portafolio/')
+        const basePath = window.location.pathname.includes('/maqueta-iavm/')
         ? '/maqueta-iavm/'
         : '/';
 
