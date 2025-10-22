@@ -1,55 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /* Trap Focus */
-    function trapFocus(e) {
-        const focusableEls = navMenu.querySelectorAll(
-            'a, button, input, [tabindex]:not([tabindex="-1"])'
-        );
-        const firstEl = focusableEls[0];
-        const lastEl = focusableEls[focusableEls.length - 1];
-
-        if (e.key === "Tab") {
-            if (e.shiftKey) { // shift + tab
-                if (document.activeElement === firstEl) {
-                    e.preventDefault();
-                    lastEl.focus();
-                }
-            } else { // tab
-                if (document.activeElement === lastEl) {
-                    e.preventDefault();
-                    firstEl.focus();
-                }
-            }
-        }
-
-        if (e.key === "Escape") {
-            navCloseBtn.click();
-        }
-    }
-
     /* Nav Toggler */
-    const navOpenBtn = document.getElementById("open-nav-menu");
-    const navCloseBtn = document.getElementById("close-nav-menu");
-    const navMenu = document.getElementById("nav-menu");
+    /* const navOpenBtn = document.getElementById("open-nav-menu");
+    const navCloseBtn = document.getElementById("close-nav-menu"); */
+    const toggleNavBtn = document.getElementById("toggle-nav-menu");
+    const navMenu = document.getElementById("mobile-nav");
 
-    navOpenBtn.addEventListener("click", () => {
+    const topHeader = document.querySelector(".top-header");
+    const mainHeaderLogo = document.querySelector(".main-header .logo");
+    const responsiveLogo = document.querySelector(".main-header .responsive-content .logo");
+    const mainHeaderNav = document.querySelector(".main-header>nav");
+    const mainHeaderAcMenu = document.querySelector(".main-header .accessibility-menu")
+    const mainContent = document.querySelector("#main-content")
+    const footer = document.querySelector("footer")
+
+
+    function openNavMenu() {
         navMenu.classList.add("open");
         navMenu.setAttribute("aria-hidden", "false");
-        navOpenBtn.setAttribute("aria-expanded", "true");
+        toggleNavBtn.setAttribute("aria-expanded", "true");
+        toggleNavBtn.setAttribute("aria-label", "Cerrar menú de navegación")
         document.body.classList.add("nav-open");
 
-        navCloseBtn.focus();
-        document.addEventListener("keydown", trapFocus);
-    });
+        topHeader.setAttribute("aria-hidden", "true");
+        mainHeaderLogo.setAttribute("aria-hidden", "true");
+        responsiveLogo.setAttribute("aria-hidden", "true");
+        mainHeaderNav.setAttribute("aria-hidden", "true");
+        mainHeaderAcMenu.setAttribute("aria-hidden", "true");
+        mainContent.setAttribute("aria-hidden", "true");
+        footer.setAttribute("aria-hidden", "true");
+        
+    }
 
-    navCloseBtn.addEventListener("click", () => {
+    function closeNavMenu() {
         navMenu.classList.remove("open");
         navMenu.setAttribute("aria-hidden", "true");
-        navOpenBtn.setAttribute("aria-expanded", "false");
+        toggleNavBtn.setAttribute("aria-expanded", "false");
+        toggleNavBtn.setAttribute("aria-label", "Abrir menú de navegación")
         document.body.classList.remove("nav-open");
 
-        navOpenBtn.focus();
-        document.removeEventListener("keydown", trapFocus);
-    });
+        topHeader.setAttribute("aria-hidden", "false");
+        mainHeaderLogo.setAttribute("aria-hidden", "false");
+        responsiveLogo.setAttribute("aria-hidden", "false");
+        mainHeaderNav.setAttribute("aria-hidden", "false");
+        mainHeaderAcMenu.setAttribute("aria-hidden", "false");
+        mainContent.setAttribute("aria-hidden", "false");
+        footer.setAttribute("aria-hidden", "false");
+    }
+
+    /* Toggler */
+    toggleNavBtn.addEventListener("click", () => {
+        const isOpen = navMenu.classList.contains("open");
+        if(isOpen) {
+            closeNavMenu();
+        } else {
+            openNavMenu();
+        }
+    })
 
     /* Sub Menu Toggler */
     document.querySelectorAll(".menu-item-has-children").forEach(item => {
