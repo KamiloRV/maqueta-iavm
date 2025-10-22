@@ -127,25 +127,30 @@ document.addEventListener("DOMContentLoaded", () => {
         // Cargar preferencia guardada
         let savedMode = localStorage.getItem("dark-mode");
 
+        const basePath = window.location.pathname.includes('/mi-portafolio/')
+        ? '/maqueta-iavm/'
+        : '/';
+
+
         // Inicializar estado
         if (savedMode === "enabled") {
             body.classList.add("dark-mode");
             body.classList.remove("light-mode");
-            darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#lightmode" /></svg>'
+            darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#lightmode" /></svg>`
         } else if (savedMode === "disabled") {
             body.classList.add("light-mode");
             body.classList.remove("dark-mode");
-            darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#darkmode" /></svg>'
+            darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#darkmode" /></svg>`
         } else {
             // Ninguna preferencia guardada → usar preferencia del sistema
             if (prefersDark) {
                 body.classList.remove("light-mode");
                 body.classList.remove("dark-mode"); // deja que el CSS de prefers-color-scheme actúe
-                darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#lightmode" /></svg>'
+                darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#lightmode" /></svg>`
             } else {
                 body.classList.remove("light-mode");
                 body.classList.remove("dark-mode");
-                darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#darkmode" /></svg>'
+                darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#darkmode" /></svg>`
             }
         }
 
@@ -158,23 +163,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 body.classList.remove("dark-mode");
                 body.classList.add("light-mode");
                 localStorage.setItem("dark-mode", "disabled");
-                darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#darkmode" /></svg>';
+                darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#darkmode" /></svg>`;
             } else if (body.classList.contains("light-mode")) {
                 // estaba forzando light → pasar a dark
                 body.classList.remove("light-mode");
                 body.classList.add("dark-mode");
                 localStorage.setItem("dark-mode", "enabled");
-                darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#lightmode" /></svg>';
+                darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#lightmode" /></svg>`;
             } else {
                 // No había clase → usar la inversa de la preferencia del sistema
                 if (prefersDark) {
                     body.classList.add("light-mode");
                     localStorage.setItem("dark-mode", "disabled");
-                    darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#darkmode" /></svg>';
+                    darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#darkmode" /></svg>`;
                 } else {
                     body.classList.add("dark-mode");
                     localStorage.setItem("dark-mode", "enabled");
-                    darkModeToggle.innerHTML = '<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="/assets/sprite.svg#lightmode" /></svg>';
+                    darkModeToggle.innerHTML = `<svg aria-hidden="true" focusable="false" width="75" height="75"><use xlink:href="${basePath}assets/sprite.svg#lightmode" /></svg>`;
                 }
             }
         });
